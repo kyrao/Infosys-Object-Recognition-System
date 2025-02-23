@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection System</title>
+    <link rel="icon" type="image/x-icon" href="static\ods_logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4e54c8;
+            --deep-blue: #2a2d64;
+            --light-blue: #8f94fb;
+            --accent-blue: #6c63ff;
+            --navy-blue: #1a1b4b;
+            --text-color: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue), var(--deep-blue));
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(42, 45, 100, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(26, 27, 75, 0.15);
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--light-blue), #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-left: 0.5rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            transition: transform var(--transition-speed);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-brand img {
+            width: 4rem;
+            height: 3.5rem;
+            object-fit: contain;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-color) !important;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--light-blue);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 76px;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(143, 148, 251, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-text {
+            color: var(--text-color);
+            font-size: 3.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, var(--accent-blue), var(--light-blue));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            animation: slideInLeft 1s ease-out 0.4s;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+            color: white;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .illustration {
+            max-width: 100%;
+            height: auto;
+            animation: floatAnimation 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(26, 27, 75, 0.3));
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Blue theme decorative elements */
+        .blue-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--light-blue), transparent);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            left: 5%;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991.98px) {
+            .hero-text {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+            .hero-description {
+                text-align: center;
+            }
+            .btn-wrapper {
+                text-align: center;
+            }
+            .illustration {
+                margin-top: 3rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-text {
+                font-size: 2rem;
+            }
+            .navbar {
+                padding: 0.5rem 0;
+            }
+            .logo-text {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="static/ods_logo.png" alt="ODS Logo" />
+                <span class="logo-text">ODS.</span>
+            </a>
+            <div class="ms-auto">
+                <a href="/about" class="nav-link d-inline-block">About Us</a>
+                <a href="/contact" class="nav-link d-inline-block">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container hero-section">
+        <div class="blue-orb orb-1"></div>
+        <div class="blue-orb orb-2"></div>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="hero-text">
+                    Upload your images and detect objects from it!
+                </h1>
+                <p class="hero-description">
+                    Experience the power of AI-driven object detection. Simple, fast, and accurate results at your fingertips.
+                </p>
+                <div class="btn-wrapper">
+                    <a href="/login" class="login-btn">Get Started</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="static/landing_page_graphics2.png" alt="AI Detection Illustration" class="illustration" />
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
