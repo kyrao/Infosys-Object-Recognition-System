@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="icon" type="image/x-icon" href="static\ods_logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a89bf3;
+            --bg-color: #f5f6fa;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container-fluid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Animated Header */
+        .page-header {
+            position: relative;
+            padding: 2rem 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-header h1::before,
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+
+        .page-header h1::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .page-header h1::after {
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .page-header h1:hover::before,
+        .page-header h1:hover::after {
+            width: 50%;
+        }
+
+        /* Animated Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.1);
+        }
+
+        .feature-card:hover::before {
+            border-top-color: var(--primary-color);
+            border-right-color: var(--primary-color);
+            animation: border-dance 1s linear infinite;
+        }
+
+        @keyframes border-dance {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
+            }
+            25% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+            }
+            50% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            75% {
+                clip-path: polygon(0 0, 2px 0, 2px 100%, 2px 100%);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
+            }
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .feature-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .feature-card:hover h3::after {
+            width: 100%;
+        }
+
+        /* Animated Technology Stack */
+        .tech-stack {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .tech-stack ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-stack li {
+            background: var(--bg-color);
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .tech-stack li:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+        }
+
+        /* Animated Footer */
+        .page-footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg, 
+                transparent, 
+                rgba(255,255,255,0.1), 
+                transparent
+            );
+            transform: rotate(0deg);
+            animation: slide 3s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .page-footer a {
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            transition: width 0.3s ease;
+        }
+
+        .page-footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="page-header">
+            <h1>About Our Platform</h1>
+        </header>
+
+        <section>
+            <h2>Platform Overview</h2>
+            <p>Our platform is designed to provide a seamless experience for users to enhance security and automate model training for safety detection.</p>
+        </section>
+
+        <section class="feature-grid">
+            <div class="feature-card">
+                <h3>Model Training</h3>
+                <p>Users can upload images for annotation, helping train the model with accurate labels.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Real-time Detection</h3>
+                <p>Supports real-time object detection from images, videos, or webcam input.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Object Detection</h3>
+                <p>Identifies objects, persons and vehicles in given environment.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Annotation & Labeling</h3>
+                <p>Create precise labels for training models and improving detection accuracy.</p>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h2>Technology Stack</h2>
+            <ul>
+                <li><strong>Machine Learning</strong> TensorFlow, PyTorch</li>
+                <li><strong>Computer Vision</strong> OpenCV, YOLO</li>
+                <li><strong>Web Development</strong> Flask, Bootstrap</li>
+                <li><strong>Security</strong> Authentication Systems</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2024 Infosys Springboard. All rights reserved.</p>
+        <a href="/contact">Contact Us</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
