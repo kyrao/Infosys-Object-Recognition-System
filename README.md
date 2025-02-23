@@ -19,8 +19,8 @@ The Object Recognition System is a versatile platform designed for real-time obj
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Muditmishra01/Infosys-Object-Recognition-System.git
-   cd Muditmishra01/Infosys-Object-Recognition-System
+   git clone https://github.com/kyrao/Infosys-Object-Recognition-System.git
+   cd kyrao/Infosys-Object-Recognition-System
    ```
 2. Install the required dependencies:
    ```bash
